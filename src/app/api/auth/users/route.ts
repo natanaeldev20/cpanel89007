@@ -2,15 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/libs/db";
 import bcrypt from "bcrypt";
 
-interface UserRequestBody {
-  firsName: string;
-  lastName: string;
-  username: string;
-  password: string;
-  email: string;
-  phone: string;
-}
-
+//METODO PARA MOSTRAR TODOS LOS USUARIOS ORDENADOS DE FORMA ASCENDENTE
 export const GET = async () => {
   try {
     const users = await prisma.user.findMany({
@@ -24,6 +16,9 @@ export const GET = async () => {
         createAt: true,
         updateAt: true,
       },
+      orderBy: {
+        id: "asc",
+      },
     });
 
     return NextResponse.json(users);
@@ -35,6 +30,16 @@ export const GET = async () => {
     );
   }
 };
+
+//METODO PARA CREAR USUARIO
+interface UserRequestBody {
+  firsName: string;
+  lastName: string;
+  username: string;
+  password: string;
+  email: string;
+  phone: string;
+}
 
 export const POST = async (req: Request) => {
   try {

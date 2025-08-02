@@ -18,10 +18,6 @@ export const GET = async (
   try {
     const preRegistrationId = parseInt(params.id);
 
-    if (isNaN(preRegistrationId)) {
-      return NextResponse.json({ error: "ID inválido" }, { status: 400 });
-    }
-
     const preRegistration = await prisma.enrollmentRequest.findUnique({
       where: { id: preRegistrationId },
     });
@@ -46,10 +42,6 @@ export const PUT = async (
 ) => {
   try {
     const preRegistrationId = parseInt(params.id);
-
-    if (isNaN(preRegistrationId)) {
-      return NextResponse.json({ error: "ID inválido" }, { status: 400 });
-    }
 
     const data: PreRegistrationUpdateBody = await req.json();
 
@@ -85,10 +77,6 @@ export const DELETE = async (
 ) => {
   try {
     const preRegistrationId = parseInt(params.id);
-
-    if (isNaN(preRegistrationId)) {
-      return NextResponse.json({ error: "ID inválido" }, { status: 400 });
-    }
 
     const deletePreRegistration = await prisma.enrollmentRequest.delete({
       where: { id: preRegistrationId },

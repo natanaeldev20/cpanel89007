@@ -28,6 +28,32 @@ export const POST = async (req: Request) => {
   try {
     const data: PreRegistrationRequestBody = await req.json();
 
+    const documentNumber = await prisma.enrollmentRequest.findUnique({
+      where: {
+        documentNumber: data.documentNumber,
+      },
+    });
+
+    if (documentNumber) {
+      return NextResponse.json(
+        { error: "El numero de documento ya existe" },
+        { status: 400 }
+      );
+    }
+
+    const email = await prisma.enrollmentRequest.findUnique({
+      where: {
+        email: data.email,
+      },
+    });
+
+    if (email) {
+      return NextResponse.json(
+        { error: "El email ya existe" },
+        { status: 400 }
+      );
+    }
+
     const newPreRegistration = await prisma.enrollmentRequest.create({
       data: {
         name: data.name,
@@ -44,7 +70,7 @@ export const POST = async (req: Request) => {
   } catch (error) {
     console.log(error);
     return NextResponse.json(
-      { error: "Error al registrarter" },
+      { error: "Error al crear registro" },
       { status: 500 }
     );
   }
