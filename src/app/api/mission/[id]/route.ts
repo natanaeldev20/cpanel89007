@@ -9,10 +9,11 @@ interface UpdateMissionData {
 
 export const PUT = async (
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) => {
   try {
-    const missionId = parseInt(params.id);
+    const { id } = await context.params;
+    const missionId = parseInt(id);
 
     const data: UpdateMissionData = await req.json();
 

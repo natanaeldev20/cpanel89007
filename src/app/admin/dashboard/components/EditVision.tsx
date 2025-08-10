@@ -1,11 +1,12 @@
 "use client";
 
-import { useForm, FieldError } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import type { FieldError } from "react-hook-form";
 import { useRef, useState } from "react";
 import { updateMission } from "../services/missionService";
 import { FaEdit } from "react-icons/fa";
 import { toast } from "react-toastify";
-import { AxiosError } from "axios";
+import type { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import TextArea from "@/components/form/TextArea";
 import { IoClose } from "react-icons/io5";

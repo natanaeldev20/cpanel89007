@@ -7,10 +7,11 @@ interface UpdateVisionData {
 
 export const PUT = async (
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) => {
   try {
-    const visionId = parseInt(params.id);
+    const { id } = await context.params;
+    const visionId = parseInt(id);
 
     const data: UpdateVisionData = await req.json();
 

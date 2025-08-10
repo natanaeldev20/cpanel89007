@@ -7,10 +7,11 @@ import { UpdateUserData } from "@/app/admin/users/types/userType";
 
 export const GET = async (
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) => {
   try {
-    const userId = parseInt(params.id);
+    const { id } = await context.params;
+    const userId = parseInt(id);
 
     if (isNaN(userId)) {
       return NextResponse.json({ error: "ID inválido" }, { status: 400 });
@@ -45,10 +46,11 @@ export const GET = async (
 
 export const PUT = async (
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) => {
   try {
-    const userId = parseInt(params.id);
+    const { id } = await context.params;
+    const userId = parseInt(id);
     if (isNaN(userId)) {
       return NextResponse.json({ error: "ID inválido" }, { status: 400 });
     }
@@ -93,10 +95,11 @@ export const PUT = async (
 
 export const DELETE = async (
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) => {
   try {
-    const userId = parseInt(params.id);
+    const { id } = await context.params;
+    const userId = parseInt(id);
 
     if (isNaN(userId)) {
       return NextResponse.json({ error: "ID inválido" }, { status: 400 });

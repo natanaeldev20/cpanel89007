@@ -16,9 +16,10 @@ export interface UpdateAuthorityData {
 
 export const PUT = async (
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) => {
-  const authorityId = parseInt(params.id);
+  const { id } = await context.params;
+  const authorityId = parseInt(id);
 
   try {
     const data = await req.formData();
@@ -74,9 +75,10 @@ export const PUT = async (
 
 export const DELETE = async (
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) => {
-  const authorityId = parseInt(params.id);
+  const { id } = await context.params;
+  const authorityId = parseInt(id);
 
   try {
     const deleteAuthority = await prisma.authority.delete({

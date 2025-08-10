@@ -28,10 +28,7 @@ export const getPreRegistration = async (): Promise<PreRegistration[]> => {
 export const createPreRegistration = async (
   data: CreatePreRegistrationData
 ) => {
-  const res = await axios.post(
-    "http://localhost:3000/api/pre-registration",
-    data
-  );
+  const res = await axios.post("/api/pre-registration", data);
   return res;
 };
 

@@ -1,7 +1,8 @@
 "use client";
 
-import { AxiosError } from "axios";
-import { useForm, FieldError } from "react-hook-form";
+import type { AxiosError } from "axios";
+import { useForm } from "react-hook-form";
+import type { FieldError } from "react-hook-form";
 import { FaPlusCircle } from "react-icons/fa";
 import { useRef, useState } from "react";
 import TextField from "@/components/form/TextField";

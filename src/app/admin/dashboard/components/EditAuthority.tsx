@@ -1,11 +1,12 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { useForm, FieldError } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import type { FieldError } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { updateAuthority } from "../services/authorityService";
 import { toast } from "react-toastify";
-import { AxiosError } from "axios";
+import type { AxiosError } from "axios";
 import TextField from "@/components/form/TextField";
 import TextArea from "@/components/form/TextArea";
 import FileInput from "@/components/form/FileInput";

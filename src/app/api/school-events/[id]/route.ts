@@ -7,9 +7,10 @@ import { UpdateEventData } from "@/app/admin/school-events/types/eventType";
 
 export const GET = async (
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) => {
-  const eventId = parseInt(params.id);
+  const { id } = await context.params;
+  const eventId = parseInt(id);
 
   try {
     const event = await prisma.event.findUnique({
@@ -35,9 +36,10 @@ export const GET = async (
 
 export const PUT = async (
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) => {
-  const eventId = parseInt(params.id);
+  const { id } = await context.params;
+  const eventId = parseInt(id);
 
   try {
     const data = await req.formData();
@@ -98,9 +100,10 @@ export const PUT = async (
 
 export const DELETE = async (
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) => {
-  const eventId = parseInt(params.id);
+  const { id } = await context.params;
+  const eventId = parseInt(id);
 
   try {
     const deleteEvent = await prisma.event.delete({

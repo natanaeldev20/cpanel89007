@@ -9,9 +9,10 @@ import { UpdateNewsData } from "@/app/admin/school-news/types/newsType";
 
 export const GET = async (
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) => {
-  const newsId = parseInt(params.id);
+  const { id } = await context.params;
+  const newsId = parseInt(id);
 
   try {
     const news = await prisma.news.findUnique({
@@ -41,9 +42,10 @@ export const GET = async (
 
 export const PUT = async (
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) => {
-  const newsId = parseInt(params.id);
+  const { id } = await context.params;
+  const newsId = parseInt(id);
 
   try {
     const data = await req.formData();
@@ -95,9 +97,10 @@ export const PUT = async (
 
 export const DELETE = async (
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) => {
-  const newsId = parseInt(params.id);
+  const { id } = await context.params;
+  const newsId = parseInt(id);
 
   try {
     const deleteNews = await prisma.news.delete({

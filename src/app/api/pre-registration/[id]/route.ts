@@ -6,10 +6,11 @@ import { UpdatePreRegistrationData } from "@/app/admin/pre-registration/types/pr
 
 export const GET = async (
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) => {
   try {
-    const preRegistrationId = parseInt(params.id);
+    const { id } = await context.params;
+    const preRegistrationId = parseInt(id);
 
     const preRegistration = await prisma.enrollmentRequest.findUnique({
       where: { id: preRegistrationId },
@@ -38,10 +39,11 @@ export const GET = async (
 
 export const PUT = async (
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) => {
   try {
-    const preRegistrationId = parseInt(params.id);
+    const { id } = await context.params;
+    const preRegistrationId = parseInt(id);
 
     const data: UpdatePreRegistrationData = await req.json();
 
@@ -75,10 +77,11 @@ export const PUT = async (
 
 export const DELETE = async (
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) => {
   try {
-    const preRegistrationId = parseInt(params.id);
+    const { id } = await context.params;
+    const preRegistrationId = parseInt(id);
 
     const deletePreRegistration = await prisma.enrollmentRequest.delete({
       where: { id: preRegistrationId },
