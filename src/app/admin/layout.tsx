@@ -6,7 +6,7 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="grid lg:grid-cols-[310px_1fr] lg:h-screen">
+    <div className="grid lg:grid-cols-[310px_1fr]">
       <Header />
       <main className="overflow-auto">{children}</main>
     </div>

@@ -10,8 +10,12 @@ import { MdLogout } from "react-icons/md";
 import { FaUsers } from "react-icons/fa";
 import { RiMenu2Fill } from "react-icons/ri";
 import { useRef, useState, useEffect } from "react";
+import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 const Header = () => {
+  const { data: session } = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
   const popupRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -37,12 +41,14 @@ const Header = () => {
   return (
     <header className="z-50 sticky top-0 bg-white shadow-sm lg:h-screen">
       <nav className="flex flex-col sr-only lg:h-full lg:not-sr-only">
-        <div className="w-full p-4 shadow-sm flex flex-row items-center gap-3">
-          <div className="w-max p-2 rounded-full bg-indigo-600 text-white">
-            <IoSchool size={35} />
+        <Link href="/">
+          <div className="w-full p-4 shadow-sm flex flex-row items-center gap-3">
+            <div className="w-max p-2 rounded-full bg-indigo-600 text-white">
+              <IoSchool size={35} />
+            </div>
+            <span className="text-xl font-semibold">InkaEdu360</span>
           </div>
-          <span className="text-xl font-semibold">InkaEdu360</span>
-        </div>
+        </Link>
         <div className="flex-1 flex flex-col justify-between">
           <div className="p-4  space-y-2">
             <BaseLink href="/admin/dashboard">
@@ -70,32 +76,39 @@ const Header = () => {
             <div className="flex px-1 py-4 rounded-lg transition-all duration-300 cursor-pointer flex-row items-center gap-3 hover:bg-gray-200">
               <figure>
                 <img
-                  src="https://alfabetajuega.com/hero/2024/05/este-cosplay-de-nezuko-kamado-de-demon-slayer-es-lo-mejor-que-veras-en-mucho-tiempo.jpg?width=768&aspect_ratio=16:9&format=nowebp"
+                  src="https://www.obrasciviles.utalca.cl/img/desa/ac_generico.jpg"
                   alt="perfil"
                   className="w-full max-w-[3rem] aspect-square object-cover rounded-full shadow-sm"
                 />
               </figure>
               <div className="w-full flex flex-col items-start">
-                <span className="text-sm font-medium">Natanael Vasquez</span>
+                <span className="text-sm font-medium">
+                  {session?.user?.name}
+                </span>
                 <span className="text-xs text-gray-400">
-                  natanaelpro360@gmail.com
+                  {session?.user?.email}
                 </span>
               </div>
             </div>
 
-            <button className="cursor-pointer">
+            <button
+              className="cursor-pointer"
+              onClick={() => signOut({ callbackUrl: "/" })}
+            >
               <MdLogout size={25} />
             </button>
           </div>
         </div>
       </nav>
       <nav className="flex flex-row items-center justify-between not-sr-only p-4 lg:sr-only">
-        <div className="flex flex-row items-center gap-3">
-          <div className="w-max p-2 rounded-full bg-indigo-600 text-white">
-            <IoSchool size={30} />
+        <Link href="/">
+          <div className="flex flex-row items-center gap-3">
+            <div className="w-max p-2 rounded-full bg-indigo-600 text-white">
+              <IoSchool size={30} />
+            </div>
+            <span className="text-lg font-semibold">InkaEdu360</span>
           </div>
-          <span className="text-lg font-semibold">InkaEdu360</span>
-        </div>
+        </Link>
         <div className="flex flex-row items-center gap-4 sr-only sm:not-sr-only">
           <BaseLink href="/admin/dashboard">
             <MdOutlineDashboardCustomize size={22} />

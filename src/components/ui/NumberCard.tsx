@@ -1,3 +1,5 @@
+"use client";
+
 type Color =
   | "border-amber-500"
   | "border-blue-500"
@@ -18,7 +20,7 @@ type ColorIcon =
 
 interface NumberCardProps {
   children: React.ReactNode;
-  count: string;
+  count: number;
   title: string;
   borderColor: Color;
   backgroundIcon: ColorIcon;
@@ -33,11 +35,11 @@ const NumberCard = ({
 }: NumberCardProps) => {
   return (
     <article
-      className={`w-full max-w-[18rem] rounded-lg bg-white shadow-sm p-4 py-6 border-l-5 ${borderColor} flex flex-row items-center justify-between`}
+      className={`w-full rounded-lg bg-white shadow-sm p-4 py-6 border-l-5 ${borderColor} flex flex-row items-center justify-between transition-all duration-200 hover:shadow-lg sm:max-w-[18rem]`}
     >
       <div className="flex flex-col">
         <span className="text-base font-medium text-gray-600">{title}</span>
-        <span className="text-lg font-bold">{count}</span>
+        <span className="text-lg font-bold">{count.toString()}</span>
       </div>
       <div className={`p-2 ${backgroundIcon} rounded-full`}>{children}</div>
     </article>

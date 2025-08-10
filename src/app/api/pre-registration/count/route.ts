@@ -5,12 +5,14 @@ import prisma from "@/libs/db";
 
 export const GET = async () => {
   try {
-    const countPreRegistration = await prisma.enrollmentRequest.count();
-    return NextResponse.json(countPreRegistration);
+    const numberPreRegistrations = await prisma.enrollmentRequest.count();
+    return NextResponse.json({ count: numberPreRegistrations });
   } catch (error) {
-    console.error(error);
+    if (process.env.NODE_ENV === "development") {
+      console.error(error);
+    }
     return NextResponse.json(
-      { error: "Error al mostrar numero de registros" },
+      { error: "Error al obtener numero de registros" },
       { status: 500 }
     );
   }

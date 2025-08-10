@@ -7,6 +7,7 @@ import { IoSchool } from "react-icons/io5";
 import { signIn } from "next-auth/react";
 import { toast, ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 interface LoginFormInputs {
   username: string;
@@ -22,25 +23,34 @@ const LoginForm = () => {
 
   const router = useRouter();
 
+  const [loading, setLoading] = useState(false);
+
   const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
-    const res = await signIn("credentials", {
-      username: data.username,
-      password: data.password,
-      redirect: false,
-    });
-
-    if (res?.error) {
-      toast.error(res.error, {
-        position: "top-right",
-      });
-    } else {
-      toast.success("Inicio de sesión exitoso", {
-        position: "top-right",
+    setLoading(true);
+    try {
+      const res = await signIn("credentials", {
+        username: data.username,
+        password: data.password,
+        redirect: false,
       });
 
-      console.log(res);
-      router.push("/admin/dashboard");
-      router.refresh();
+      if (res?.error) {
+        toast.error(res.error, {
+          position: "top-right",
+        });
+      } else {
+        toast.success("Inicio de sesión exitoso", {
+          position: "top-right",
+        });
+
+        console.log(res);
+        router.push("/admin/dashboard");
+        router.refresh();
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -92,7 +102,7 @@ const LoginForm = () => {
             type="submit"
             className="bg-indigo-600 w-full px-4 py-3 rounded-lg font-medium text-white text-base cursor-pointer shadow-lg transition-all duration-200 hover:shadow-xl"
           >
-            Iniciar sesión
+            {loading ? "Iniciando sesión..." : "Iniciar sesión"}
           </button>
           <ToastContainer />
         </form>

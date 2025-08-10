@@ -4,11 +4,13 @@ import { useForm, FieldError } from "react-hook-form";
 import TextField from "@/components/form/TextField";
 import PasswordField from "@/components/form/PasswordField";
 import { useRef, useState } from "react";
-import { updateUser, UpdateUserData } from "../services/authService";
+import { updateUser } from "../services/authService";
+import { UpdateUserData } from "../types/userType";
 import { FaEdit } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
+import { IoClose } from "react-icons/io5";
 
 interface EditUserProp {
   user: {
@@ -66,14 +68,12 @@ const EditUser = ({ user }: EditUserProp) => {
   const handleOpenModal = () => {
     if (modalRef.current) {
       modalRef.current.showModal();
-      document.body.style.overflow = "hidden";
     }
   };
 
   const handleCloseModal = () => {
     if (modalRef.current) {
       modalRef.current.close();
-      document.body.style.overflow = "auto";
     }
   };
 
@@ -90,7 +90,13 @@ const EditUser = ({ user }: EditUserProp) => {
         className="w-xl bg-transparent m-auto backdrop:bg-[#0009]"
         onClick={handleBackdrop}
       >
-        <div className="p-8 bg-white rounded-2xl shadow-2xl">
+        <div className="p-8 relative bg-white rounded-2xl shadow-2xl">
+          <button
+            className="p-2 bg-indigo-600 rounded-full text-white shadow-sm cursor-pointer absolute right-3 top-3"
+            onClick={handleCloseModal}
+          >
+            <IoClose size={20} />
+          </button>
           <div className="pb-4">
             <h2 className="text-xl font-medium">Editar usuario</h2>
           </div>

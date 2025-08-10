@@ -1,6 +1,6 @@
 import DeletePreRegistration from "./DeletePreRegistration";
 
-export interface PreRegistrationProps {
+export interface PreRegistration {
   id: string;
   name: string;
   lastName: string;
@@ -12,7 +12,7 @@ export interface PreRegistrationProps {
 }
 
 interface UserTableProps {
-  preRegistrations: PreRegistrationProps[];
+  preRegistrations: PreRegistration[];
 }
 
 const PreRegistrationTable = ({ preRegistrations }: UserTableProps) => {

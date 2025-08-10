@@ -5,11 +5,11 @@ import { useForm, FieldError, SubmitHandler } from "react-hook-form";
 import { FaPlusCircle } from "react-icons/fa";
 import { useRef, useState } from "react";
 import TextField from "@/components/form/TextField";
-import PasswordField from "@/components/form/PasswordField";
 import { createPreRegistration } from "../services/preRegistrationService";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import SelectInput from "@/components/form/SelectInput";
+import { IoClose } from "react-icons/io5";
 
 interface PreRegistrationProps {
   name: string;
@@ -71,14 +71,12 @@ const CreatePreRegistration = () => {
   const handleOpenModal = () => {
     if (modalRef.current) {
       modalRef.current.showModal();
-      document.body.style.overflow = "hidden";
     }
   };
 
   const handleCloseModal = () => {
     if (modalRef.current) {
       modalRef.current.close();
-      document.body.style.overflow = "auto";
     }
   };
 
@@ -95,7 +93,13 @@ const CreatePreRegistration = () => {
         className="w-xl bg-transparent m-auto backdrop:bg-[#0009]"
         onClick={handleBackdrop}
       >
-        <div className="p-8 bg-white rounded-2xl shadow-2xl">
+        <div className="p-8 relative bg-white rounded-2xl shadow-2xl">
+          <button
+            className="p-2 bg-indigo-600 rounded-full text-white shadow-sm cursor-pointer absolute right-3 top-3"
+            onClick={handleCloseModal}
+          >
+            <IoClose size={20} />
+          </button>
           <div className="pb-4">
             <h2 className="text-xl font-medium">Crear nuevo registro</h2>
           </div>

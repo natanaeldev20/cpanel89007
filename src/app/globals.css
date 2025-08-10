@@ -3,4 +3,11 @@
 body {
   font-family: var(--font-poppins);
   background: #f9fafb;
+  overflow: auto;
+}
+
+@media (max-width: 1023px) {
+  body {
+    overflow: auto;
+  }
 }

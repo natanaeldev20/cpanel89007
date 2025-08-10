@@ -3,13 +3,13 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import { FaUsers } from "react-icons/fa";
 import CreateButton from "@/app/admin/users/components/CreateUser";
 import { ToastContainer } from "react-toastify";
-import { getUsers, countUser } from "./services/authService";
+import { getUsers, getCountUser } from "./services/authService";
 import UserTable from "./components/UserTable";
 import NumberCard from "@/components/ui/NumberCard";
 
 const Users = async () => {
   const users = await getUsers();
-  const count = await countUser();
+  const numberUsers = await getCountUser();
 
   return (
     <>
@@ -22,7 +22,7 @@ const Users = async () => {
             title="Usuarios"
             borderColor="border-amber-500"
             backgroundIcon="bg-amber-100"
-            count={count}
+            count={numberUsers}
           >
             <FaUsers size={25} color="orange" />
           </NumberCard>

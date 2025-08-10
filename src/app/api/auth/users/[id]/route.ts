@@ -1,15 +1,9 @@
 import { NextResponse } from "next/server";
 import prisma from "@/libs/db";
 import bcrypt from "bcrypt";
+import { UpdateUserData } from "@/app/admin/users/types/userType";
 
-interface UserUpdateBody {
-  firsName?: string;
-  lastName?: string;
-  username?: string;
-  password?: string;
-  email?: string;
-  phone?: string;
-}
+//METODO PARA OBTENER UN USUARIO
 
 export const GET = async (
   req: Request,
@@ -35,15 +29,19 @@ export const GET = async (
 
     const { password, ...userWithoutPassword } = user;
 
-    return NextResponse.json(userWithoutPassword);
+    return NextResponse.json(userWithoutPassword, { status: 200 });
   } catch (error) {
-    console.log(error);
+    if (process.env.NODE_ENV === "development") {
+      console.error(error);
+    }
     return NextResponse.json(
       { error: "Error al obtener el usuario" },
       { status: 500 }
     );
   }
 };
+
+//METODO PARA ACTUALIZAR UN USUARIO
 
 export const PUT = async (
   req: Request,
@@ -55,7 +53,7 @@ export const PUT = async (
       return NextResponse.json({ error: "ID inválido" }, { status: 400 });
     }
 
-    const data: UserUpdateBody = await req.json();
+    const data: UpdateUserData = await req.json();
 
     const existingUser = await prisma.user.findUnique({
       where: { id: userId },
@@ -81,13 +79,17 @@ export const PUT = async (
 
     return NextResponse.json(user);
   } catch (error) {
-    console.log("Error al actualizar el usuario:", error);
+    if (process.env.NODE_ENV === "development") {
+      console.error(error);
+    }
     return NextResponse.json(
       { error: "Error al actualizar el usuario" },
       { status: 500 }
     );
   }
 };
+
+//METODO PARA ELIMINAR UN USUARIO
 
 export const DELETE = async (
   req: Request,
@@ -108,7 +110,9 @@ export const DELETE = async (
 
     return NextResponse.json(userWithoutPassword);
   } catch (error) {
-    console.log(error);
+    if (process.env.NODE_ENV === "development") {
+      console.error(error);
+    }
     return NextResponse.json(
       { error: "Error al eliminar el usuario" },
       { status: 500 }

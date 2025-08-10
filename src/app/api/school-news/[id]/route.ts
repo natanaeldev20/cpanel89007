@@ -3,12 +3,9 @@ import prisma from "@/libs/db";
 import { unlink } from "fs/promises";
 import { processImage } from "@/libs/processImage";
 import cloudinary from "@/libs/cloudinary";
+import { UpdateNewsData } from "@/app/admin/school-news/types/newsType";
 
-interface newsUpdate {
-  title?: string;
-  content?: string;
-  imageUrl?: string;
-}
+//METODO PARA OBTENER UNA NOTICIA
 
 export const GET = async (
   req: Request,
@@ -30,13 +27,17 @@ export const GET = async (
 
     return NextResponse.json(news);
   } catch (error) {
-    console.error(error);
+    if (process.env.NODE_ENV === "development") {
+      console.error(error);
+    }
     return NextResponse.json(
       { error: "Error al obtener evento" },
       { status: 500 }
     );
   }
 };
+
+//METODO PARA ACTUALIZAR UNA NOTICIA
 
 export const PUT = async (
   req: Request,
@@ -58,7 +59,7 @@ export const PUT = async (
       );
     }
 
-    const update: newsUpdate = {
+    const update: UpdateNewsData = {
       title,
       content,
     };
@@ -80,13 +81,17 @@ export const PUT = async (
 
     return NextResponse.json(updateNews);
   } catch (error) {
-    console.error(error);
+    if (process.env.NODE_ENV === "development") {
+      console.error(error);
+    }
     return NextResponse.json(
       { error: "Error al actualizar noticia" },
       { status: 500 }
     );
   }
 };
+
+//METODO PARA ELIMINAR UNA NOTICIA
 
 export const DELETE = async (
   req: Request,
@@ -101,7 +106,9 @@ export const DELETE = async (
 
     return new Response(null, { status: 204 });
   } catch (error) {
-    console.error(error);
+    if (process.env.NODE_ENV === "development") {
+      console.error(error);
+    }
     return NextResponse.json(
       { error: "Error al eliminar noticia" },
       { status: 500 }

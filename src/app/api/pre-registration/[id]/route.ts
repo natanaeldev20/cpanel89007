@@ -1,15 +1,8 @@
 import { NextResponse } from "next/server";
 import prisma from "@/libs/db";
+import { UpdatePreRegistrationData } from "@/app/admin/pre-registration/types/preRegistrationType";
 
-interface PreRegistrationUpdateBody {
-  name?: string;
-  lastName?: string;
-  documentType?: string;
-  documentNumber?: string;
-  email?: string;
-  phone?: string;
-  degree?: string;
-}
+//METODO PARA OBTENER UN REGISTRO
 
 export const GET = async (
   req: Request,
@@ -29,12 +22,19 @@ export const GET = async (
       );
     }
 
-    return NextResponse.json(preRegistration);
+    return NextResponse.json(preRegistration, { status: 200 });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ error: "Error al obtener registro" });
+    if (process.env.NODE_ENV === "development") {
+      console.error(error);
+    }
+    return NextResponse.json(
+      { error: "Error al obtener registro" },
+      { status: 500 }
+    );
   }
 };
+
+//METODO PARA ACTUALIZAR UN REGISRO
 
 export const PUT = async (
   req: Request,
@@ -43,7 +43,7 @@ export const PUT = async (
   try {
     const preRegistrationId = parseInt(params.id);
 
-    const data: PreRegistrationUpdateBody = await req.json();
+    const data: UpdatePreRegistrationData = await req.json();
 
     const existingPreRegistration = await prisma.enrollmentRequest.findUnique({
       where: { id: preRegistrationId },
@@ -70,6 +70,8 @@ export const PUT = async (
     );
   }
 };
+
+//METODO PARA ELIMINAR UN REGISTRO
 
 export const DELETE = async (
   req: Request,

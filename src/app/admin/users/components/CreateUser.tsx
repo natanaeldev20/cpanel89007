@@ -9,6 +9,7 @@ import PasswordField from "@/components/form/PasswordField";
 import { registerUser } from "../services/authService";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { IoClose } from "react-icons/io5";
 
 interface UserProps {
   firsName: string;
@@ -70,14 +71,12 @@ const CreateButton = () => {
   const handleOpenModal = () => {
     if (modalRef.current) {
       modalRef.current.showModal();
-      document.body.style.overflow = "hidden";
     }
   };
 
   const handleCloseModal = () => {
     if (modalRef.current) {
       modalRef.current.close();
-      document.body.style.overflow = "auto";
     }
   };
 
@@ -94,7 +93,13 @@ const CreateButton = () => {
         className="w-xl bg-transparent m-auto backdrop:bg-[#0009]"
         onClick={handleBackdrop}
       >
-        <div className="p-8 bg-white rounded-2xl shadow-2xl">
+        <div className="p-8 relative bg-white rounded-2xl shadow-2xl">
+          <button
+            className="p-2 bg-indigo-600 rounded-full text-white shadow-sm cursor-pointer absolute right-3 top-3"
+            onClick={handleCloseModal}
+          >
+            <IoClose size={20} />
+          </button>
           <div className="pb-4">
             <h2 className="text-xl font-medium">Agregar nuevo usuario</h2>
           </div>

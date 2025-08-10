@@ -17,9 +17,11 @@ export const GET = async () => {
       );
     }
 
-    return NextResponse.json(news);
+    return NextResponse.json({ news }, { status: 200 });
   } catch (error) {
-    console.error(error);
+    if (process.env.NODE_ENV === "development") {
+      console.error(error);
+    }
     return NextResponse.json(
       { error: "Error al cargar noticias" },
       { status: 500 }

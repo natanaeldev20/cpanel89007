@@ -1,59 +1,38 @@
 import axios from "axios";
+import {
+  User,
+  CreateUserData,
+  UpdateUserData,
+  IdProp,
+} from "../types/userType";
 
 //METODO PARA MOSTRAR USUARIOS
 
-export interface User {
-  id: string;
-  firsName: string;
-  lastName: string;
-  username: string;
-  email: string;
-  phone: string;
-}
-
-const BASE_URL = process.env.NEXTAUTH_URL || "http://localhost:3000";
-
 export const getUsers = async (): Promise<User[]> => {
-  const { data } = await axios.get(`${BASE_URL}/api/auth/users`);
-  return data;
+  try {
+    const { data } = await axios.get<{ success: boolean; users: User[] }>(
+      `${process.env.NEXTAUTH_URL}/api/auth/users`
+    );
+
+    if (!data.success || !Array.isArray(data.users)) {
+      throw new Error("Respuesta inválida del servidor");
+    }
+
+    return data.users;
+  } catch (error) {
+    console.error("Error al obtener los usuarios: ", error);
+    throw new Error("No se puedo obtener los usuarios");
+  }
 };
 
 //METODO PARA CREAR USUARIO
 
-interface UserProps {
-  firsName: string;
-  lastName: string;
-  username: string;
-  password: string;
-  email: string;
-  phone: string;
-}
-
-export const registerUser = async ({
-  firsName,
-  lastName,
-  username,
-  password,
-  email,
-  phone,
-}: UserProps) => {
-  const res = await axios.post("/api/auth/users", {
-    firsName,
-    lastName,
-    username,
-    password,
-    email,
-    phone,
-  });
-
+export const registerUser = async (user: CreateUserData) => {
+  const res = await axios.post("/api/auth/users", user);
   return res;
 };
 
 //METODO PARA ELIMINAR UN USUARIO
-
-interface IdProp {
-  userId: string;
-}
 
 export const deleteUser = async ({ userId }: IdProp) => {
   try {
@@ -67,15 +46,6 @@ export const deleteUser = async ({ userId }: IdProp) => {
 
 //METODO PARA ACTUALIZAR UN USUARIO
 
-export interface UpdateUserData {
-  firsName?: string;
-  lastName?: string;
-  username?: string;
-  password?: string;
-  email?: string;
-  phone?: string;
-}
-
 export const updateUser = async (id: string, data: UpdateUserData) => {
   try {
     const res = await axios.put(`/api/auth/users/${id}`, data);
@@ -88,7 +58,19 @@ export const updateUser = async (id: string, data: UpdateUserData) => {
 
 //METODO PARA MOSTRAR NUMERO DE USARIOS
 
-export const countUser = async () => {
-  const { data } = await axios.get(`${BASE_URL}/api/auth/users/count`);
-  return data;
+export const getCountUser = async (): Promise<number> => {
+  try {
+    const { data } = await axios.get<{ count: number }>(
+      `${process.env.NEXTAUTH_URL}/api/auth/users/count`
+    );
+
+    if (typeof data.count !== "number") {
+      throw new Error("Respuesta inesperada del servidor");
+    }
+
+    return data.count;
+  } catch (error) {
+    console.error("Error al obtener numero de usuarios: ", error);
+    throw new Error("No se pudo obtener el numero de usuarios");
+  }
 };

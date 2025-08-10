@@ -4,9 +4,15 @@ import { unlink } from "fs/promises";
 import cloudinary from "@/libs/cloudinary";
 import { processImage } from "@/libs/processImage";
 
+//METODO PARA OBTENER TODAS LAS NOTICIAS
+
 export const GET = async () => {
   try {
-    const news = await prisma.news.findMany();
+    const news = await prisma.news.findMany({
+      orderBy: {
+        publishedAt: "desc",
+      },
+    });
 
     if (news.length === 0) {
       return NextResponse.json(
@@ -15,15 +21,21 @@ export const GET = async () => {
       );
     }
 
-    return NextResponse.json(news);
+    return NextResponse.json({ news });
   } catch (error) {
-    console.error(error);
+    if (process.env.NODE_ENV === "development") {
+      console.error(error);
+    }
     return NextResponse.json(
-      { error: "Error al cargar noticias" },
+      {
+        error: "Error al obtener las noticias",
+      },
       { status: 500 }
     );
   }
 };
+
+//METODO PARA CREAR UNA NOTICIA
 
 export const POST = async (req: Request) => {
   try {
@@ -32,7 +44,7 @@ export const POST = async (req: Request) => {
 
     if (!image || !(image instanceof File)) {
       return NextResponse.json(
-        { message: "La imagen es requerida y debe ser un archivo válido" },
+        { error: "La imagen es requerida y debe ser un archivo válido" },
         { status: 400 }
       );
     }
@@ -54,7 +66,9 @@ export const POST = async (req: Request) => {
 
     return NextResponse.json(newNews);
   } catch (error) {
-    console.error(error);
+    if (process.env.NODE_ENV === "development") {
+      console.error(error);
+    }
     return NextResponse.json(
       { error: "Error al crear noticia" },
       { status: 500 }

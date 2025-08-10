@@ -17,7 +17,7 @@ export const GET = async () => {
       );
     }
 
-    return NextResponse.json(events);
+    return NextResponse.json({ events }, { status: 200 });
   } catch (error) {
     console.error(error);
     return NextResponse.json(

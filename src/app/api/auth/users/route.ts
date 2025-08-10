@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/libs/db";
 import bcrypt from "bcrypt";
+import { CreateUserData } from "@/app/admin/users/types/userType";
 
 //METODO PARA MOSTRAR TODOS LOS USUARIOS ORDENADOS DE FORMA ASCENDENTE
+
 export const GET = async () => {
   try {
     const users = await prisma.user.findMany({
@@ -21,61 +23,48 @@ export const GET = async () => {
       },
     });
 
-    return NextResponse.json(users);
-  } catch (error) {
-    console.log(error);
     return NextResponse.json(
-      { error: "Error al obtener los usuarios" },
+      {
+        success: true,
+        users,
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    if (process.env.NODE_ENV === "development") {
+      console.error(error);
+    }
+
+    return NextResponse.json(
+      {
+        success: false,
+        message: "No se pudo obtener la lista de usuarios.",
+        error: "DatabaseConnectionError",
+      },
       { status: 500 }
     );
   }
 };
 
 //METODO PARA CREAR USUARIO
-interface UserRequestBody {
-  firsName: string;
-  lastName: string;
-  username: string;
-  password: string;
-  email: string;
-  phone: string;
-}
 
 export const POST = async (req: Request) => {
   try {
-    const data: UserRequestBody = await req.json();
+    const data: CreateUserData = await req.json();
 
-    const email = await prisma.user.findUnique({
-      where: {
-        email: data.email,
-      },
-    });
+    const [emailExists, usernameExists] = await Promise.all([
+      prisma.user.findUnique({ where: { email: data.email } }),
+      prisma.user.findUnique({ where: { username: data.username } }),
+    ]);
 
-    if (email) {
+    if (emailExists || usernameExists) {
       return NextResponse.json(
         {
-          error: "El correo electrónico ya existe",
+          error: emailExists
+            ? "El correo electrónico ya existe"
+            : "El nombre de usuario ya existe",
         },
-        {
-          status: 400,
-        }
-      );
-    }
-
-    const username = await prisma.user.findUnique({
-      where: {
-        username: data.username,
-      },
-    });
-
-    if (username) {
-      return NextResponse.json(
-        {
-          error: "El nombre de usuario ya existe",
-        },
-        {
-          status: 400,
-        }
+        { status: 400 }
       );
     }
 
@@ -94,12 +83,14 @@ export const POST = async (req: Request) => {
 
     const { password: _, ...user } = newUser;
 
-    return NextResponse.json(user);
+    return NextResponse.json(user, { status: 201 });
   } catch (error) {
-    console.error("Error al crear el usuario:", error);
+    if (process.env.NODE_ENV === "development") {
+      console.error("Error al crear el usuario:", error);
+    }
     return NextResponse.json(
       {
-        error: "Error al crear el usuario",
+        error: "No se pudo crear el usuario",
       },
       {
         status: 500,

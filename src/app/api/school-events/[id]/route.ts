@@ -3,15 +3,7 @@ import prisma from "@/libs/db";
 import { processImage } from "@/libs/processImage";
 import cloudinary from "@/libs/cloudinary";
 import { unlink } from "fs/promises";
-
-interface EventUpdate {
-  title: string;
-  description: string;
-  location: string;
-  startDate: string;
-  endDate: string;
-  imageUrl?: string;
-}
+import { UpdateEventData } from "@/app/admin/school-events/types/eventType";
 
 export const GET = async (
   req: Request,
@@ -49,22 +41,29 @@ export const PUT = async (
 
   try {
     const data = await req.formData();
-    const image = data.get("imageURL");
+    const image = data.get("imageUrl");
 
     const title = data.get("title")?.toString();
     const description = data.get("description")?.toString();
     const location = data.get("location")?.toString();
-    const startDate = data.get("startDate")?.toString();
-    const endDate = data.get("endDate")?.toString();
+    const rawStartDate = data.get("startDate")?.toString();
+    const rawEndDate = data.get("endDate")?.toString();
 
-    if (!title || !description || !location || !startDate || !endDate) {
+    if (!title || !description || !location || !rawStartDate || !rawEndDate) {
       return NextResponse.json(
         { error: "Faltan datos requeridos" },
         { status: 400 }
       );
     }
 
-    const update: EventUpdate = {
+    const startDate = new Date(rawStartDate);
+    const endDate = new Date(rawEndDate);
+
+    if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
+      return NextResponse.json({ error: "Fechas inválidas" }, { status: 400 });
+    }
+
+    const update: UpdateEventData = {
       title,
       description,
       location,

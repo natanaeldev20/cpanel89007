@@ -5,10 +5,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { deleteUser } from "../services/authService";
 import { RiDeleteBin6Line } from "react-icons/ri";
-
-interface IdProp {
-  userId: string;
-}
+import { IdProp } from "../types/userType";
 
 const DeleteUser = ({ userId }: IdProp) => {
   const modalRef = useRef<HTMLDialogElement | null>(null);

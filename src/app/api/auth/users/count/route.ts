@@ -5,10 +5,12 @@ import prisma from "@/libs/db";
 
 export const GET = async () => {
   try {
-    const countUser = await prisma.user.count();
-    return NextResponse.json(countUser);
+    const numberUsers = await prisma.user.count();
+    return NextResponse.json({ count: numberUsers }, { status: 200 });
   } catch (error) {
-    console.log(error);
+    if (process.env.NODE_ENV === "development") {
+      console.error(error);
+    }
     return NextResponse.json(
       { error: "Error al mostrar numero de usuarios" },
       { status: 500 }

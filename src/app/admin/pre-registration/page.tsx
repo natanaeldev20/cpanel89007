@@ -4,13 +4,13 @@ import { MdAppRegistration } from "react-icons/md";
 import CreatePreRegistration from "./components/CreatePreRegistration";
 import { ToastContainer } from "react-toastify";
 import NumberCard from "@/components/ui/NumberCard";
-import { countPreRegistration } from "./services/preRegistrationService";
+import { getCountPreRegistration } from "./services/preRegistrationService";
 import { MdOutlineFamilyRestroom } from "react-icons/md";
 import PreRegistrationTable from "./components/PreRegistrationTable";
 import { getPreRegistration } from "./services/preRegistrationService";
 
 const PreRegistration = async () => {
-  const countPreRegistrations = await countPreRegistration();
+  const numberPreRegistrations = await getCountPreRegistration();
   const preRegistrations = await getPreRegistration();
 
   return (
@@ -21,7 +21,7 @@ const PreRegistration = async () => {
       <Section>
         <div className="pb-8">
           <NumberCard
-            count={countPreRegistrations}
+            count={numberPreRegistrations}
             borderColor="border-green-500"
             backgroundIcon="bg-green-100"
             title="Usuarios interesados"

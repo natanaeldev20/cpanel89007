@@ -58,3 +58,23 @@ model Event {
   updatedAt   DateTime   @updatedAt
 }
 
+model Vision {
+  id Int @id @default(autoincrement())
+  content String
+}
+
+model Mission {
+  id Int @id @default(autoincrement())
+  content String
+}
+
+model Authority {
+  id Int @id @default(autoincrement())
+  rol String
+  name String
+  lastName String
+  message String
+  imageUrl String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
