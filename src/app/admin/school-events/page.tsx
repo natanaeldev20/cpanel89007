@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import SectionHeader from "@/components/ui/SectionHeader";
 import Section from "@/components/ui/Section";
 import { MdOutlinePostAdd } from "react-icons/md";
@@ -6,6 +8,7 @@ import { getCountEvents, getEvents } from "./services/eventService";
 import CreateEvent from "./components/CreateEvent";
 import { ToastContainer } from "react-toastify";
 import EventTable from "./components/EventTable";
+export const revalidate = 0;
 
 const SchoolEvents = async () => {
   const numberEvents = await getCountEvents();

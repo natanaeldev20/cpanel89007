@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import SectionHeader from "@/components/ui/SectionHeader";
 import Section from "@/components/ui/Section";
 import { MdAppRegistration } from "react-icons/md";

@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import SectionHeader from "@/components/ui/SectionHeader";
 import Section from "@/components/ui/Section";
 import { FaNewspaper } from "react-icons/fa6";
@@ -6,6 +8,7 @@ import { getCountNews, getNews } from "./services/newsService";
 import CreateNews from "./components/CreateNews";
 import { ToastContainer } from "react-toastify";
 import NewsCard from "./components/NewsCard";
+export const revalidate = 0;
 
 const SchoolNews = async () => {
   const numberNews = await getCountNews();

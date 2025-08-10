@@ -18,6 +18,7 @@ import { ToastContainer } from "react-toastify";
 import { getAuthority } from "./services/authorityService";
 import AuthorityCard from "./components/AuthorityCard";
 import CreateAuthority from "./components/CreateAuthority";
+export const revalidate = 0;
 
 const Dashboard = async () => {
   const numberUsers = await getCountUser();

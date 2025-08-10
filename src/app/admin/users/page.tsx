@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Section from "@/components/ui/Section";
 import SectionHeader from "@/components/ui/SectionHeader";
 import { FaUsers } from "react-icons/fa";
@@ -6,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import { getUsers, getCountUser } from "./services/authService";
 import UserTable from "./components/UserTable";
 import NumberCard from "@/components/ui/NumberCard";
+export const revalidate = 0;
 
 const Users = async () => {
   const users = await getUsers();

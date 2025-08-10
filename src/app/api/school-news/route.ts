@@ -15,10 +15,7 @@ export const GET = async () => {
     });
 
     if (news.length === 0) {
-      return NextResponse.json(
-        { error: "No hay noticias para mostrar" },
-        { status: 404 }
-      );
+      return NextResponse.json({ news: [] }, { status: 200 });
     }
 
     return NextResponse.json({ news });

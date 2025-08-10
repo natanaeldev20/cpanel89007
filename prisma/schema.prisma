@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,67 +8,67 @@ datasource db {
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  firsName String 
+  id       Int      @id @default(autoincrement())
+  firsName String
   lastName String
-  username String @unique
-  password String 
-  email String @unique
-  phone String
+  username String   @unique
+  password String
+  email    String   @unique
+  phone    String
   createAt DateTime @default(now())
   updateAt DateTime @updatedAt
 }
 
 model EnrollmentRequest {
-  id Int @id @default(autoincrement())
-  name String
-  lastName String
-  documentType String
-  documentNumber String @unique
-  email String @unique
-  phone String
-  degree String 
-  createAt DateTime @default(now())
+  id             Int      @id @default(autoincrement())
+  name           String
+  lastName       String
+  documentType   String
+  documentNumber String   @unique
+  email          String   @unique
+  phone          String
+  degree         String
+  createAt       DateTime @default(now())
 }
 
 model News {
-  id Int @id @default(autoincrement())
-  title String
-  content String
-  imageUrl String
-  publishedAt DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id          Int      @id @default(autoincrement())
+  title       String
+  content     String
+  imageUrl    String
+  publishedAt DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Event {
-  id Int @id @default(autoincrement())
-  title String
+  id          Int      @id @default(autoincrement())
+  title       String
   description String
   location    String
   startDate   DateTime
   endDate     DateTime
-  imageUrl String
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  imageUrl    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Vision {
-  id Int @id @default(autoincrement())
+  id      Int    @id @default(autoincrement())
   content String
 }
 
 model Mission {
-  id Int @id @default(autoincrement())
+  id      Int    @id @default(autoincrement())
   content String
 }
 
 model Authority {
-  id Int @id @default(autoincrement())
-  rol String
-  name String
-  lastName String
-  message String
-  imageUrl String
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id        Int      @id @default(autoincrement())
+  rol       String
+  name      String
+  lastName  String
+  message   String
+  imageUrl  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
