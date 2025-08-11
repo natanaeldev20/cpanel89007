@@ -5,7 +5,8 @@ export const processImage = async (image: File): Promise<string> => {
   const bytes = await image.arrayBuffer();
   const buffer = Buffer.from(bytes);
 
-  const filePath = path.join(process.cwd(), "public", image.name);
+  // Guardar en carpeta temporal de Vercel en vez de public/
+  const filePath = path.join("/tmp", image.name);
   await writeFile(filePath, buffer);
   return filePath;
 };
