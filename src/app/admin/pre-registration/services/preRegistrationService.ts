@@ -34,12 +34,10 @@ export const createPreRegistration = async (
 
 //METODO PARA OBTENER NUMERO DE REGISTROS
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "";
-
 export const getCountPreRegistration = async (): Promise<number> => {
   try {
     const { data } = await axios.get<{ count: number }>(
-      `${baseUrl}/api/pre-registration/count`
+      `${process.env.NEXTAUTH_URL}/api/pre-registration/count`
     );
 
     if (typeof data.count !== "number") {
