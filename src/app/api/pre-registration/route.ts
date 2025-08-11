@@ -25,17 +25,20 @@ export const GET = async () => {
 //METODO PARA CREAR UN REGISTRO
 
 const corsHeaders = {
-  "Access-Control-Allow-Origin": "http://localhost:4321", // URL de Astro
+  "Access-Control-Allow-Origin": process.env.ALLOWED_ORIGIN || "*", // "*" o tu dominio de Astro
   "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, Authorization",
 };
 
+// Preflight request handler
 export async function OPTIONS() {
-  return NextResponse.json({}, { headers: corsHeaders });
+  return new NextResponse(null, { status: 204, headers: corsHeaders });
 }
+
+// Create record
 export async function POST(req: Request) {
   try {
-    const data: CreatePreRegistrationData = await req.json();
+    const data = await req.json();
 
     const [documentNumber, email] = await Promise.all([
       prisma.enrollmentRequest.findUnique({
@@ -50,7 +53,7 @@ export async function POST(req: Request) {
       return NextResponse.json(
         {
           error: documentNumber
-            ? "El numero de documento ya existe"
+            ? "El número de documento ya existe"
             : "El email ya existe",
         },
         { status: 400, headers: corsHeaders }
@@ -58,15 +61,7 @@ export async function POST(req: Request) {
     }
 
     const newPreRegistration = await prisma.enrollmentRequest.create({
-      data: {
-        name: data.name,
-        lastName: data.lastName,
-        documentType: data.documentType,
-        documentNumber: data.documentNumber,
-        email: data.email,
-        phone: data.phone,
-        degree: data.degree,
-      },
+      data,
     });
 
     return NextResponse.json(newPreRegistration, {

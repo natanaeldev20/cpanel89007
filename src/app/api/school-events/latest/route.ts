@@ -11,10 +11,7 @@ export const GET = async () => {
     });
 
     if (events.length === 0) {
-      return NextResponse.json(
-        { error: "No hay eventos para mostrar" },
-        { status: 404 }
-      );
+      return NextResponse.json({ events: [] }, { status: 200 });
     }
 
     return NextResponse.json({ events }, { status: 200 });
