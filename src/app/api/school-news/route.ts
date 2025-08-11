@@ -3,6 +3,8 @@ import prisma from "@/libs/db";
 import { unlink } from "fs/promises";
 import cloudinary from "@/libs/cloudinary";
 import { processImage } from "@/libs/processImage";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/libs/auth";
 
 //METODO PARA OBTENER TODAS LAS NOTICIAS
 
@@ -35,6 +37,12 @@ export const GET = async () => {
 //METODO PARA CREAR UNA NOTICIA
 
 export const POST = async (req: Request) => {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+  }
+
   try {
     const data = await req.formData();
     const image = data.get("imageUrl");
