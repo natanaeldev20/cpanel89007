@@ -36,18 +36,17 @@ export const createPreRegistration = async (
 
 export const getCountPreRegistration = async (): Promise<number> => {
   try {
-    const { data } = await axios.get<{ count: number }>(
+    const res = await axios.get(
       `${process.env.NEXTAUTH_URL}/api/pre-registration/count`
     );
-
-    if (typeof data.count !== "number") {
+    console.log("Respuesta completa:", res.data);
+    if (typeof res.data.count !== "number") {
       throw new Error("Formato incorrecto");
     }
-
-    return data.count;
+    return res.data.count;
   } catch (error) {
-    console.error("Erro al obtener el numero de registros: ", error);
-    throw new Error("No se pudo obtener el numero de registros");
+    console.error("Error al obtener el número de registros:", error);
+    throw new Error("No se pudo obtener el número de registros");
   }
 };
 
