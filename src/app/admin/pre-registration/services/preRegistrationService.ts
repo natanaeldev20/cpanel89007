@@ -1,16 +1,16 @@
-import axios from "axios";
 import {
   PreRegistration,
   CreatePreRegistrationData,
 } from "../types/preRegistrationType";
+import api from "@/service/api"; // la instancia que creamos arriba
 
 //METODO PARA MOSTRAR TODOS LOS REGISTROS
 
 export const getPreRegistration = async (): Promise<PreRegistration[]> => {
   try {
-    const { data } = await axios.get<{
+    const { data } = await api.get<{
       preRegistrations: PreRegistration[];
-    }>(`${process.env.NEXTAUTH_URL}/api/pre-registration`);
+    }>(`/api/pre-registration`);
 
     if (!Array.isArray(data.preRegistrations)) {
       throw new Error("Respuesta inválida del servidor");
@@ -28,7 +28,7 @@ export const getPreRegistration = async (): Promise<PreRegistration[]> => {
 export const createPreRegistration = async (
   data: CreatePreRegistrationData
 ) => {
-  const res = await axios.post("/api/pre-registration", data);
+  const res = await api.post("/api/pre-registration", data);
   return res;
 };
 
@@ -36,9 +36,7 @@ export const createPreRegistration = async (
 
 export const getCountPreRegistration = async (): Promise<number> => {
   try {
-    const res = await axios.get(
-      `${process.env.NEXTAUTH_URL}/api/pre-registration/count`
-    );
+    const res = await api.get(`/api/pre-registration/count`);
     console.log("Respuesta completa:", res.data);
     if (typeof res.data.count !== "number") {
       throw new Error("Formato incorrecto");
@@ -54,7 +52,7 @@ export const getCountPreRegistration = async (): Promise<number> => {
 
 export const deletePreRegistration = async (id: string) => {
   try {
-    const res = await axios.delete(`/api/pre-registration/${id}`);
+    const res = await api.delete(`/api/pre-registration/${id}`);
     return res;
   } catch (error) {
     console.error("Error al eliminar registro:", error);

@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "@/service/api";
 import {
   User,
   CreateUserData,
@@ -10,8 +10,8 @@ import {
 
 export const getUsers = async (): Promise<User[]> => {
   try {
-    const { data } = await axios.get<{ success: boolean; users: User[] }>(
-      `${process.env.NEXTAUTH_URL}/api/auth/users`
+    const { data } = await api.get<{ success: boolean; users: User[] }>(
+      `/api/auth/users`
     );
 
     if (!data.success || !Array.isArray(data.users)) {
@@ -28,7 +28,7 @@ export const getUsers = async (): Promise<User[]> => {
 //METODO PARA CREAR USUARIO
 
 export const registerUser = async (user: CreateUserData) => {
-  const res = await axios.post("/api/auth/users", user);
+  const res = await api.post("/api/auth/users", user);
   return res;
 };
 
@@ -36,7 +36,7 @@ export const registerUser = async (user: CreateUserData) => {
 
 export const deleteUser = async ({ userId }: IdProp) => {
   try {
-    const res = await axios.delete(`/api/auth/users/${userId}`);
+    const res = await api.delete(`/api/auth/users/${userId}`);
     return res;
   } catch (error) {
     console.error("Error al eliminar el usuario:", error);
@@ -48,7 +48,7 @@ export const deleteUser = async ({ userId }: IdProp) => {
 
 export const updateUser = async (id: string, data: UpdateUserData) => {
   try {
-    const res = await axios.put(`/api/auth/users/${id}`, data);
+    const res = await api.put(`/api/auth/users/${id}`, data);
     return res.data;
   } catch (error) {
     console.error("Error actualizando usuario:", error);
@@ -60,9 +60,7 @@ export const updateUser = async (id: string, data: UpdateUserData) => {
 
 export const getCountUser = async (): Promise<number> => {
   try {
-    const { data } = await axios.get<{ count: number }>(
-      `${process.env.NEXTAUTH_URL}/api/auth/users/count`
-    );
+    const { data } = await api.get<{ count: number }>(`/api/auth/users/count`);
 
     if (typeof data.count !== "number") {
       throw new Error("Respuesta inesperada del servidor");
