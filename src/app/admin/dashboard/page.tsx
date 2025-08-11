@@ -32,7 +32,7 @@ const Dashboard = async () => {
   return (
     <>
       <SectionHeader>
-        Dashboard JAJA
+        Dashboard
         <MdOutlineDashboardCustomize />
       </SectionHeader>
       <Section>
