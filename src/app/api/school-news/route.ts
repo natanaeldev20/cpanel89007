@@ -63,9 +63,7 @@ export const POST = async (req: Request) => {
 
     return NextResponse.json(newNews);
   } catch (error) {
-    if (process.env.NODE_ENV === "development") {
-      console.error(error);
-    }
+    console.error(error);
     return NextResponse.json(
       { error: "Error al crear noticia" },
       { status: 500 }
