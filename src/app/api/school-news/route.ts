@@ -39,14 +39,14 @@ export const POST = async (req: Request) => {
     const data = await req.formData();
     const image = data.get("imageUrl");
 
-    if (!image || !(image instanceof File)) {
+    if (!image || typeof image === "string") {
       return NextResponse.json(
         { error: "La imagen es requerida y debe ser un archivo válido" },
         { status: 400 }
       );
     }
 
-    const filePath = await processImage(image);
+    const filePath = await processImage(image as File);
     const resCloudinary = await cloudinary.uploader.upload(filePath);
 
     if (resCloudinary) {
