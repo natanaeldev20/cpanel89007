@@ -17,7 +17,9 @@ import { signOut } from "next-auth/react";
 const Header = () => {
   const { data: session } = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false); // Nuevo estado para popup de perfil
   const popupRef = useRef<HTMLDivElement>(null);
+  const profileRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -30,6 +32,12 @@ const Header = () => {
       ) {
         setMenuOpen(false);
       }
+      if (
+        profileRef.current &&
+        !profileRef.current.contains(event.target as Node)
+      ) {
+        setProfileOpen(false);
+      }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
@@ -40,6 +48,7 @@ const Header = () => {
 
   return (
     <header className="z-50 sticky top-0 bg-white shadow-sm lg:h-screen">
+      {/* --- Barra lateral desktop --- */}
       <nav className="flex flex-col sr-only lg:h-full lg:not-sr-only">
         <Link href="/">
           <div className="w-full p-4 shadow-sm flex flex-row items-center gap-3">
@@ -100,6 +109,8 @@ const Header = () => {
           </div>
         </div>
       </nav>
+
+      {/* --- Barra superior móvil --- */}
       <nav className="flex flex-row items-center justify-between not-sr-only p-4 lg:sr-only">
         <Link href="/">
           <div className="flex flex-row items-center gap-3">
@@ -138,19 +149,48 @@ const Header = () => {
           >
             <RiMenu2Fill size={22} />
           </button>
-          <img
-            src="https://alfabetajuega.com/hero/2024/05/este-cosplay-de-nezuko-kamado-de-demon-slayer-es-lo-mejor-que-veras-en-mucho-tiempo.jpg?width=768&aspect_ratio=16:9&format=nowebp"
-            alt="perfil"
-            className="w-full max-w-[3rem] aspect-square object-cover rounded-full shadow-sm"
-          />
+          <div
+            ref={profileRef}
+            className="relative"
+            onClick={() => setProfileOpen((prev) => !prev)}
+          >
+            <img
+              src="https://www.obrasciviles.utalca.cl/img/desa/ac_generico.jpg"
+              alt="perfil"
+              className="w-full max-w-[3rem] aspect-square object-cover rounded-full shadow-sm"
+            />
+
+            {/* Popup de perfil */}
+            {profileOpen && (
+              <div className="absolute right-0 mt-2 bg-white shadow-xl rounded-lg p-4 w-48 z-50">
+                <div className="flex flex-col items-start mb-3">
+                  <span className="text-sm font-medium">
+                    {session?.user?.name}
+                  </span>
+                  <span className="text-xs text-gray-400 truncate">
+                    {session?.user?.email}
+                  </span>
+                </div>
+                <button
+                  className="w-full bg-indigo-800 rounded-lg p-2 text-white flex flex-row items-center justify-center gap-2"
+                  onClick={() => signOut({ callbackUrl: "/" })}
+                >
+                  <MdLogout size={20} />
+                  Cerrar sesión
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </nav>
+
+      {/* Menú móvil hamburguesa */}
       {menuOpen && (
         <div
           className="absolute w-full p-4 not-sr-only sm:sr-only"
           ref={popupRef}
         >
-          <div className="bg-white shadow-xl p-4">
+          <div className="bg-white shadow-2xl p-4 rounded-xl">
             <nav>
               <BaseLink href="/admin/dashboard">
                 <MdOutlineDashboardCustomize size={22} />

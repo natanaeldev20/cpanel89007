@@ -1,10 +1,10 @@
-import axios from "axios";
+import api from "@/service/api";
 
 //METODO PARA MOSTRAR VISION
 
 export const getVision = async () => {
   try {
-    const { data } = await axios.get(`${process.env.NEXTAUTH_URL}/api/vision`);
+    const { data } = await api.get(`/api/vision`);
     return data;
   } catch (error) {
     console.error("Error al obtener la vision: ", error);
@@ -20,7 +20,7 @@ interface UpdateVisionData {
 
 export const updateVision = async (id: string, data: UpdateVisionData) => {
   try {
-    const res = await axios.put(`/api/vision/${id}`, data);
+    const res = await api.put(`/api/vision/${id}`, data);
     return res.data;
   } catch (error) {
     console.error("Error actualizando vision:", error);

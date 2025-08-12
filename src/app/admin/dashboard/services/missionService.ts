@@ -1,10 +1,10 @@
-import axios from "axios";
+import api from "@/service/api";
 
 //METODO PARA MOSTRAR VISION
 
 export const getMission = async () => {
   try {
-    const { data } = await axios.get(`${process.env.NEXTAUTH_URL}/api/mission`);
+    const { data } = await api.get(`/api/mission`);
     return data;
   } catch (error) {
     console.error("Error al obtener la mision: ", error);
@@ -20,7 +20,7 @@ interface UpdateMissionData {
 
 export const updateMission = async (id: string, data: UpdateMissionData) => {
   try {
-    const res = await axios.put(`/api/mission/${id}`, data);
+    const res = await api.put(`/api/mission/${id}`, data);
     return res.data;
   } catch (error) {
     console.error("Error actualizando mision:", error);

@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "@/service/api";
 
 interface Authority {
   id: string;
@@ -13,8 +13,8 @@ interface Authority {
 
 export const getAuthority = async (): Promise<Authority[]> => {
   try {
-    const { data } = await axios.get<{ authority: Authority[] }>(
-      `${process.env.NEXTAUTH_URL}/api/authority`
+    const { data } = await api.get<{ authority: Authority[] }>(
+      `/api/authority`
     );
 
     if (!Array.isArray(data.authority)) {
@@ -34,7 +34,7 @@ export const getAuthority = async (): Promise<Authority[]> => {
 
 export const deleteAuthority = async (id: string) => {
   try {
-    const res = await axios.delete(`/api/authority/${id}`);
+    const res = await api.delete(`/api/authority/${id}`);
     return res;
   } catch (error) {
     console.error("Error al eliminar la autoridad: ", error);
@@ -46,7 +46,7 @@ export const deleteAuthority = async (id: string) => {
 
 export const updateAuthority = async (id: string, data: FormData) => {
   try {
-    const res = await axios.put(`/api/authority/${id}`, data);
+    const res = await api.put(`/api/authority/${id}`, data);
     return res;
   } catch (error) {
     console.error("Error actualizando autoridad:", error);
@@ -58,7 +58,7 @@ export const updateAuthority = async (id: string, data: FormData) => {
 
 export const createAuthority = async (data: FormData) => {
   try {
-    const res = await axios.post("/api/authority", data);
+    const res = await api.post("/api/authority", data);
     return res;
   } catch (error) {
     console.error("Error al crear la autoridad: ", error);
