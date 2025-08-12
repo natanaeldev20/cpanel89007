@@ -11,53 +11,20 @@ export const GET = async () => {
     });
 
     if (news.length === 0) {
-      return new NextResponse(
-        JSON.stringify({ error: "No hay noticias para mostrar" }),
-        {
-          status: 404,
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET, OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type, Authorization",
-          },
-        }
+      return NextResponse.json(
+        { error: "No hay noticias para mostrar" },
+        { status: 404 }
       );
     }
 
-    return new NextResponse(JSON.stringify({ news }), {
-      status: 200,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-      },
-    });
+    return NextResponse.json({ news }, { status: 200 });
   } catch (error) {
     if (process.env.NODE_ENV === "development") {
       console.error(error);
     }
-    return new NextResponse(
-      JSON.stringify({ error: "Error al cargar noticias" }),
-      {
-        status: 500,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": "GET, OPTIONS",
-          "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        },
-      }
+    return NextResponse.json(
+      { error: "Error al cargar noticias" },
+      { status: 500 }
     );
   }
-};
-
-// Manejo de preflight CORS
-export const OPTIONS = async () => {
-  return new NextResponse(null, {
-    status: 204,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization",
-    },
-  });
 };
