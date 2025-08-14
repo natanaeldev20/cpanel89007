@@ -13,11 +13,12 @@ import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
+import { HiOutlineDocumentReport } from "react-icons/hi";
 
 const Header = () => {
   const { data: session } = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [profileOpen, setProfileOpen] = useState(false); // Nuevo estado para popup de perfil
+  const [profileOpen, setProfileOpen] = useState(false);
   const popupRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -80,6 +81,10 @@ const Header = () => {
               <FaUsers size={22} />
               Gestión de Usuarios
             </BaseLink>
+            <BaseLink href="/admin/reports">
+              <HiOutlineDocumentReport size={22} />
+              Reportes
+            </BaseLink>
           </div>
           <div className="w-full p-4 shadow-xl border-t-2 border-gray-200 flex flex-row items-center justify-between">
             <div className="flex px-1 py-4 rounded-lg transition-all duration-300 cursor-pointer flex-row items-center gap-3 hover:bg-gray-200">
@@ -135,6 +140,9 @@ const Header = () => {
           </BaseLink>
           <BaseLink href="/admin/users">
             <FaUsers size={22} />
+          </BaseLink>
+          <BaseLink href="/admin/reports">
+            <HiOutlineDocumentReport size={22} />
           </BaseLink>
         </div>
 
@@ -211,6 +219,10 @@ const Header = () => {
               <BaseLink href="/admin/users">
                 <FaUsers size={22} />
                 Gestión de Usuarios
+              </BaseLink>
+              <BaseLink href="/admin/reports">
+                <HiOutlineDocumentReport size={22} />
+                Reportes
               </BaseLink>
             </nav>
           </div>

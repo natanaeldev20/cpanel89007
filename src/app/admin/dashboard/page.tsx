@@ -18,7 +18,7 @@ import { ToastContainer } from "react-toastify";
 import { getAuthority } from "./services/authorityService";
 import AuthorityCard from "./components/AuthorityCard";
 import CreateAuthority from "./components/CreateAuthority";
-export const revalidate = 0;
+import CreatePDF from "../reports/components/GeneratePdfUsers";
 
 const Dashboard = async () => {
   const numberUsers = await getCountUser();
@@ -59,7 +59,7 @@ const Dashboard = async () => {
             backgroundIcon="bg-violet-100"
             count={numberNews}
           >
-            <FaNewspaper size={22} color="violet" />
+            <FaNewspaper size={25} color="violet" />
           </NumberCard>
           <NumberCard
             backgroundIcon="bg-blue-100"
@@ -67,7 +67,7 @@ const Dashboard = async () => {
             title="Eventos"
             count={numberEvents}
           >
-            <MdOutlinePostAdd size={22} />
+            <MdOutlinePostAdd size={25} />
           </NumberCard>
         </div>
         <div className="w-full flex justify-between mb-8 flex-col space-y-6">
