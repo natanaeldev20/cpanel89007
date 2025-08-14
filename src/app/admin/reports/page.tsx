@@ -2,6 +2,7 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import Section from "@/components/ui/Section";
 import { HiOutlineDocumentReport } from "react-icons/hi";
 import ReportCard from "./components/ReportCard";
+import { ToastContainer } from "react-toastify";
 
 const Reports = () => {
   return (
@@ -42,6 +43,7 @@ const Reports = () => {
           />
         </div>
       </Section>
+      <ToastContainer />
     </>
   );
 };
