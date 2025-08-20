@@ -87,7 +87,7 @@ const CreateNews = () => {
     <>
       <dialog
         ref={modalRef}
-        className="w-full max-w-2xl bg-transparent m-auto backdrop:bg-[#0009] overflow-hidden"
+        className="w-full max-w-2xl bg-transparent p-4 m-auto backdrop:bg-[#0009] overflow-hidden"
         onClick={handleBackdrop}
       >
         <div className="max-h-[90vh] relative overflow-y-auto p-8 bg-white rounded-2xl shadow-2xl">
