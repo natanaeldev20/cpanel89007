@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 import SectionHeader from "@/components/ui/SectionHeader";
 import Section from "@/components/ui/Section";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
