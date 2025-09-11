@@ -36,7 +36,7 @@ const PasswordField = ({
           type={showPassword ? "text" : "password"}
           {...register}
           placeholder={placeholder}
-          className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 input-focus transition-all"
+          className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 input-focus transition-all dark:bg-[#232323] dark:border-gray-700/50 dark:text-white"
         />
         <button
           className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 cursor-pointer"

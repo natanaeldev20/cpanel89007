@@ -73,7 +73,7 @@ const LoginForm = () => {
           </div>
         </div>
         <form
-          className="bg-white p-8 space-y-6 rounded-b-2xl"
+          className="bg-white dark:bg-[#171717] p-8 space-y-6 rounded-b-2xl"
           onSubmit={handleSubmit(onSubmit)}
         >
           <TextField

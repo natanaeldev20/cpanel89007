@@ -23,7 +23,7 @@ const TextField = ({ label, placeholder, register, error }: TextFieldProps) => {
           type="text"
           {...register}
           placeholder={placeholder}
-          className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 input-focus transition-all"
+          className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 input-focus transition-all dark:bg-[#232323] dark:border-gray-700/50 dark:text-white"
         />
       </div>
       {error?.message && (

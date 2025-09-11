@@ -20,7 +20,8 @@ const BaseLink = ({ href, children }: LinkProps) => {
         "w-full flex flex-row items-center justify-center  gap-3 p-4 text-base rounded-lg transition-all duration-200 md:justify-start",
         {
           "bg-indigo-600 text-white shadow-lg": isActive,
-          "bg-transparent text-indigo-600 hover:bg-indigo-100": !isActive,
+          "bg-transparent text-indigo-600 hover:bg-indigo-100 dark:text-[#7c7b7e] dark:hover:bg-[#2a2a2c]":
+            !isActive,
         }
       )}
       href={href}

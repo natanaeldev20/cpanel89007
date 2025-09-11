@@ -48,7 +48,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="z-50 sticky top-0 bg-white shadow-sm lg:h-screen">
+    <header className="z-50 sticky top-0 bg-white shadow-sm dark:bg-[j] dark:border-r-2 dark:border-[#39393b] lg:h-screen">
       {/* --- Barra lateral desktop --- */}
       <nav className="flex flex-col sr-only lg:h-full lg:not-sr-only">
         <Link href="/">
@@ -56,10 +56,12 @@ const Header = () => {
             <div className="w-max p-2 rounded-full bg-indigo-600 text-white">
               <IoSchool size={35} />
             </div>
-            <span className="text-xl font-semibold">InkaEdu360</span>
+            <span className="text-xl font-semibold dark:text-white">
+              InkaEdu360
+            </span>
           </div>
         </Link>
-        <div className="flex-1 flex flex-col justify-between">
+        <div className="flex-1 flex flex-col justify-between dark:bg-[#161618]">
           <div className="p-4  space-y-2">
             <BaseLink href="/admin/dashboard">
               <MdOutlineDashboardCustomize size={22} />
@@ -86,8 +88,8 @@ const Header = () => {
               Reportes
             </BaseLink>
           </div>
-          <div className="w-full p-4 shadow-xl border-t-2 border-gray-200 flex flex-row items-center justify-between">
-            <div className="flex px-1 py-4 rounded-lg transition-all duration-300 cursor-pointer flex-row items-center gap-3 hover:bg-gray-200">
+          <div className="w-full p-4 shadow-xl border-t-2 border-gray-200 flex flex-row items-center justify-between dark:border-none">
+            <div className="flex px-1 py-4 rounded-lg transition-all duration-300 cursor-pointer flex-row items-center gap-3 hover:bg-gray-200 dark:hover:bg-[#28272a]">
               <figure>
                 <img
                   src="https://www.obrasciviles.utalca.cl/img/desa/ac_generico.jpg"
@@ -96,7 +98,7 @@ const Header = () => {
                 />
               </figure>
               <div className="w-full flex flex-col items-start">
-                <span className="text-sm font-medium">
+                <span className="text-sm font-medium dark:text-white">
                   {session?.user?.name}
                 </span>
                 <span className="text-xs text-gray-400">
@@ -106,7 +108,7 @@ const Header = () => {
             </div>
 
             <button
-              className="cursor-pointer"
+              className="cursor-pointer dark:text-white"
               onClick={() => signOut({ callbackUrl: "/" })}
             >
               <MdLogout size={25} />

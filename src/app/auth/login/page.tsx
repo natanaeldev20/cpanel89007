@@ -3,7 +3,7 @@ import LoginForm from "./components/LoginForm";
 const Login = () => {
   return (
     <>
-      <main className="min-h-screen flex items-center justify-center p-4 bg-indigo-50">
+      <main className="h-dvh flex items-center justify-center p-4 bg-white bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))] dark:bg-neutral-950 dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]">
         <LoginForm />
       </main>
     </>
