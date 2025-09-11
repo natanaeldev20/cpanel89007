@@ -15,7 +15,10 @@ const DataPicker = ({
 }: DataPickerProps) => {
   return (
     <div className="w-full">
-      <label htmlFor="" className="text-sm font-medium text-gray-700">
+      <label
+        htmlFor=""
+        className="text-sm font-medium text-gray-700 dark:text-white/90"
+      >
         {label}
       </label>
       <div>

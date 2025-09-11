@@ -51,11 +51,11 @@ const ReportCard = ({
   };
 
   return (
-    <article className="w-full bg-white shadow-2xs p-4 rounded-lg flex flex-col justify-between gap-8">
+    <article className="w-full bg-white shadow-2xs p-4 rounded-lg flex flex-col justify-between gap-8 dark:bg-white/15">
       <div className="w-full flex flex-row gap-2">
         <div className="w-full">
           <span className="text-lg font-medium">{title}</span>
-          <p className="text-gray-700 text-base">{text}</p>
+          <p className="text-gray-700 text-base dark:text-white/80">{text}</p>
         </div>
         <div>
           <div className={`w-max p-2 ${color} rounded-full`}>

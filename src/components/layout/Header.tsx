@@ -48,7 +48,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="z-50 sticky top-0 bg-white shadow-sm dark:bg-[j] dark:border-r-2 dark:border-[#39393b] lg:h-screen">
+    <header className="z-50 sticky top-0 bg-white shadow-sm dark:bg-[#161618] dark:border-r-2 dark:border-[#39393b] lg:h-screen">
       {/* --- Barra lateral desktop --- */}
       <nav className="flex flex-col sr-only lg:h-full lg:not-sr-only">
         <Link href="/">
@@ -124,7 +124,9 @@ const Header = () => {
             <div className="w-max p-2 rounded-full bg-indigo-600 text-white">
               <IoSchool size={30} />
             </div>
-            <span className="text-lg font-semibold">InkaEdu360</span>
+            <span className="text-lg font-semibold dark:text-white">
+              InkaEdu360
+            </span>
           </div>
         </Link>
         <div className="flex flex-row items-center gap-4 sr-only sm:not-sr-only">
@@ -172,9 +174,9 @@ const Header = () => {
 
             {/* Popup de perfil */}
             {profileOpen && (
-              <div className="absolute right-0 mt-2 bg-white shadow-xl rounded-lg p-4 w-48 z-50">
+              <div className="absolute right-0 mt-2 bg-white shadow-xl rounded-lg p-4 w-48 z-50 dark:bg-white/5">
                 <div className="flex flex-col items-start mb-3">
-                  <span className="text-sm font-medium">
+                  <span className="text-sm font-medium dark:text-white">
                     {session?.user?.name}
                   </span>
                   <span className="text-xs text-gray-400 truncate">
@@ -200,7 +202,7 @@ const Header = () => {
           className="absolute w-full p-4 not-sr-only sm:sr-only"
           ref={popupRef}
         >
-          <div className="bg-white shadow-2xl p-4 rounded-xl">
+          <div className="bg-white shadow-2xl p-4 rounded-xl dark:bg-[#161618]">
             <nav>
               <BaseLink href="/admin/dashboard">
                 <MdOutlineDashboardCustomize size={22} />

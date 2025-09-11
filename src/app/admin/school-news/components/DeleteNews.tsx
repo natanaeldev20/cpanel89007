@@ -36,7 +36,7 @@ const DeleteNews = ({ id }: IdProp) => {
     <>
       <dialog
         ref={modalRef}
-        className="m-auto rounded-lg shadow-md p-6 w-96 backdrop:bg-[#0009]"
+        className="m-auto rounded-lg shadow-md p-6 w-96 backdrop:bg-[#0009] dark:bg-[#161618] dark:text-white"
       >
         <h2 className="text-xl font-semibold mb-4">¿Eliminar noticia?</h2>
         <p className="mb-6">Esta acción no se puede deshacer.</p>

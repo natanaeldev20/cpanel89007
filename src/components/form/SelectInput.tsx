@@ -25,14 +25,14 @@ const SelectInput = ({
   return (
     <div className={`mb-4 ${className}`}>
       {label && (
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-gray-700 mb-1 dark:text-white">
           {label}
         </label>
       )}
       <select
         {...register}
         disabled={disabled}
-        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 input-focus transition-all"
+        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 input-focus transition-all dark:bg-[#161618]"
       >
         <option value="">-- Selecciona una opción --</option>
         {options.map((opt) => (

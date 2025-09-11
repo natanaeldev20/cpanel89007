@@ -17,42 +17,37 @@ interface UserTableProps {
 const UserTable = ({ users }: UserTableProps) => {
   return (
     <div className="overflow-x-auto rounded-lg shadow">
-      <table className="min-w-full divide-y divide-gray-200 bg-white">
-        <thead className="bg-gray-100">
+      <table className="min-w-full divide-y divide-gray-200 bg-white dark:bg-[#161618] dark:divide-white/15">
+        <thead className="text-gray-700 bg-gray-100 dark:bg-[#161618] dark:text-white">
           <tr>
-            <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
-              #
-            </th>
-            <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
-              Nombres
-            </th>
-            <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
+            <th className="px-4 py-2 text-left text-sm font-medium">#</th>
+            <th className="px-4 py-2 text-left text-sm font-medium">Nombres</th>
+            <th className="px-4 py-2 text-left text-sm font-medium">
               Apellidos
             </th>
-            <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
-              Usuario
-            </th>
-            <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
-              Email
-            </th>
-            <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
+            <th className="px-4 py-2 text-left text-sm font-medium">Usuario</th>
+            <th className="px-4 py-2 text-left text-sm font-medium">Email</th>
+            <th className="px-4 py-2 text-left text-sm font-medium">
               Teléfono
             </th>
-            <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
+            <th className="px-4 py-2 text-left text-sm font-medium">
               Acciones
             </th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-100">
+        <tbody className="divide-y divide-gray-100 dark:divide-white/15">
           {users.map((user) => (
-            <tr key={user.id} className="hover:bg-gray-50">
-              <td className="px-4 text-sm text-gray-700">{user.id}</td>
-              <td className="p-4 text-sm text-gray-700">{user.firsName}</td>
-              <td className="p-4 text-sm text-gray-700">{user.lastName}</td>
-              <td className="p-4 text-sm text-gray-700">{user.username}</td>
-              <td className="p-4 text-sm text-gray-700">{user.email}</td>
-              <td className="p-4 text-sm text-gray-700">{user.phone}</td>
-              <td className="p-4 text-sm text-gray-700 flex flex-row items-center gap-2">
+            <tr
+              key={user.id}
+              className="text-gray-700 hover:bg-gray-50 dark:hover:bg-[#161618] dark:text-white/90"
+            >
+              <td className="px-4 text-sm">{user.id}</td>
+              <td className="p-4 text-sm">{user.firsName}</td>
+              <td className="p-4 text-sm">{user.lastName}</td>
+              <td className="p-4 text-sm">{user.username}</td>
+              <td className="p-4 text-sm">{user.email}</td>
+              <td className="p-4 text-sm">{user.phone}</td>
+              <td className="p-4 text-sm flex flex-row items-center gap-2">
                 <EditUser user={user} />
                 <DeleteUser userId={user.id} />
               </td>

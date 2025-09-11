@@ -84,7 +84,7 @@ const EditVision = ({ vision }: EditVisionProp) => {
         className="w-xl bg-transparent m-auto backdrop:bg-[#0009]"
         onClick={handleBackdrop}
       >
-        <div className="p-8 relative bg-white rounded-2xl shadow-2xl">
+        <div className="p-8 relative bg-white rounded-2xl shadow-2xl dark:bg-[#161618] dark:text-white">
           <button
             className="p-2 bg-indigo-600 rounded-full text-white shadow-sm cursor-pointer absolute right-3 top-3"
             onClick={handleCloseModal}

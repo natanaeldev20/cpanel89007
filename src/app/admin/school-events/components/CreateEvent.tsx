@@ -94,7 +94,7 @@ const CreateEvent = () => {
         className="w-full max-w-2xl bg-transparent p-4 m-auto backdrop:bg-[#0009] overflow-hidden"
         onClick={handleBackdrop}
       >
-        <div className="max-h-[90vh] relative overflow-y-auto p-8 bg-white rounded-2xl">
+        <div className="max-h-[90vh] relative overflow-y-auto p-8 bg-white rounded-2xl dark:bg-[#161618] dark:text-white">
           <button
             className="p-2 bg-indigo-600 rounded-full text-white shadow-sm cursor-pointer absolute right-3 top-3"
             onClick={handleCloseModal}

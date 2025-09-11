@@ -35,10 +35,12 @@ const NumberCard = ({
 }: NumberCardProps) => {
   return (
     <article
-      className={`w-full rounded-lg bg-white shadow-sm p-4 py-6 border-l-5 ${borderColor} flex flex-row items-center justify-between transition-all duration-200 hover:shadow-lg sm:max-w-[18rem]`}
+      className={`w-full rounded-lg bg-white shadow-sm p-4 py-6 border-l-5 ${borderColor} flex flex-row items-center justify-between transition-all duration-200 hover:shadow-lg dark:bg-white/15 sm:max-w-[18rem]`}
     >
       <div className="flex flex-col">
-        <span className="text-base font-medium text-gray-600">{title}</span>
+        <span className="text-base font-medium text-gray-600 dark:text-white">
+          {title}
+        </span>
         <span className="text-lg font-bold">{count.toString()}</span>
       </div>
       <div className={`p-2 ${backgroundIcon} rounded-full`}>{children}</div>

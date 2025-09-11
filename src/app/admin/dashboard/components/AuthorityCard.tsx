@@ -19,7 +19,7 @@ const AuthorityCard = ({
 }: Authority) => {
   return (
     <>
-      <article className="w-full rounded-2xl shadow-xl">
+      <article className="w-full rounded-2xl shadow-xl dark:bg-white/10">
         <figure className="w-full flex items-center justify-center">
           <img
             className="w-full rounded-t-2xl object-cover aspect-square"

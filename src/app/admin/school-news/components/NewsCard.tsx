@@ -37,7 +37,7 @@ const NewsCard = ({ id, title, content, imageUrl }: News) => {
         className="m-auto bg-transparent p-4 w-full max-w-4xl rounded-2xl backdrop:bg-[#0009]"
         onClick={handleBackdrop}
       >
-        <div className="rounded-2xl bg-white shadow-xl relative">
+        <div className="rounded-2xl bg-white shadow-xl relative dark:bg-[#161618] dark:text-white/90">
           <button
             className="p-2 bg-indigo-600 rounded-full text-white shadow-sm cursor-pointer absolute right-3 top-3"
             onClick={handleCloseModal}
@@ -56,7 +56,7 @@ const NewsCard = ({ id, title, content, imageUrl }: News) => {
           </figure>
         </div>
       </dialog>
-      <article className="w-full rounded-2xl shadow-xl">
+      <article className="w-full rounded-2xl shadow-xl dark:bg-white/15">
         <figure className="w-full relative flex items-center justify-center">
           <img
             className="w-full rounded-t-2xl object-cover aspect-video"

@@ -100,7 +100,7 @@ const CreateAuthority = () => {
         className="w-full p-4 max-w-2xl bg-transparent m-auto backdrop:bg-[#0009] overflow-hidden "
         onClick={handleBackdrop}
       >
-        <div className="max-h-[90vh] relative overflow-y-auto p-8 bg-white rounded-2xl shadow-2xl">
+        <div className="max-h-[90vh] relative overflow-y-auto p-8 bg-white rounded-2xl shadow-2xl dark:bg-[#161618] dark:text-white">
           <button
             className="p-2 bg-indigo-600 rounded-full text-white shadow-sm cursor-pointer absolute right-3 top-3"
             onClick={handleCloseModal}
